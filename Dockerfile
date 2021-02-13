@@ -1,4 +1,7 @@
 FROM alpine:3.13.1
+LABEL maintainer=spahrj@gmail.com
+LABEL org.opencontainers.image.source https://github.com/jeffspahr/filebeat-arm64-docker
+
 
 RUN   apk update \                                                                                                                                                                                                                        
  &&   apk --no-cache add ca-certificates wget openssl\                                                                                                                                                                                                      
