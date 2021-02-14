@@ -12,4 +12,4 @@ RUN tar -xzvf filebeat-7.11.0-linux-arm64.tar.gz
 
 RUN ls -l /filebeat-7.11.0-linux-arm64
 
-ENTRYPOINT [ "/filebeat-7.11.0-linux-arm64/filebeat" ]
+ENTRYPOINT ["/filebeat-7.11.0-linux-arm64/filebeat", "-c filebeat.yml"]
