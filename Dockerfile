@@ -10,4 +10,4 @@ RUN   apk update \
 RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.11.0-linux-arm64.tar.gz
 RUN tar -xzvf filebeat-7.11.0-linux-arm64.tar.gz
 
-ENTRYPOINT filebeat
+ENTRYPOINT filebeat-7.11.0-linux-arm64/filebeat
