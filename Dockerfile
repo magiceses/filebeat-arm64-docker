@@ -23,6 +23,7 @@ RUN tar -xzvf filebeat-7.11.0-linux-arm64.tar.gz
 RUN mv filebeat-7.11.0-linux-arm64 /usr/share/filebeat
 
 RUN ls -l /usr/share/filebeat
+RUN ls -l /sbin/
 
 #RUN groupadd --gid 1000 filebeat
 #RUN useradd -M --uid 1000 --gid 1000 --groups 0 --home /usr/share/filebeat filebeat
