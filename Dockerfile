@@ -30,5 +30,5 @@ RUN ls -l /sbin/
 #USER filebeat
 ENV LIBBEAT_MONITORING_CGROUPS_HIERARCHY_OVERRIDE=/
 WORKDIR /usr/share/filebeat
-ENTRYPOINT ["/sbin/tini" "--" "/usr/local/bin/docker-entrypoint"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/docker-entrypoint"]
 CMD ["-environment" "container"]
