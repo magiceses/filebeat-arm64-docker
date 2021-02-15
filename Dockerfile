@@ -3,7 +3,7 @@
 ## alias dfimage="docker run -v /var/run/docker.sock:/var/run/docker.sock --rm alpine/dfimage"
 ## dfimage -sV=1.36 docker.elastic.co/beats/filebeat:7.11.0
 # Follow tini directions for alpine https://github.com/krallin/tini
-FROM --platform=linux/arm64 alpine:3.13.1
+FROM ubuntu:20.04
 LABEL maintainer=spahrj@gmail.com
 LABEL org.opencontainers.image.source https://github.com/jeffspahr/filebeat-arm64-docker
 
@@ -14,9 +14,8 @@ ENV GODEBUG=madvdontneed=1
 COPY docker-entrypoint /usr/local/bin/docker-entrypoint
 RUN chmod 755 /usr/local/bin/docker-entrypoint
 
-RUN apk update \                                                                                                                                                                                                                        
- && apk --no-cache add ca-certificates wget openssl tini\                                                                                                                                                                                                      
- && update-ca-certificates    
+RUN apt update \                                                                                                                                                                                                                        
+ && apt install ca-certificates wget openssl tini\                                                                                                                                                                                                      
 
 RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.11.0-linux-arm64.tar.gz
 RUN tar -xzvf filebeat-7.11.0-linux-arm64.tar.gz
@@ -28,9 +27,8 @@ RUN addgroup --gid 1000 filebeat
 RUN adduser --no-create-home --uid 1000 --ingroup filebeat --home /usr/share/filebeat --disabled-password filebeat
 RUN addgroup filebeat root
 RUN chown -R filebeat.filebeat /usr/share/filebeat/
-RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 USER filebeat
 ENV LIBBEAT_MONITORING_CGROUPS_HIERARCHY_OVERRIDE=/
 WORKDIR /usr/share/filebeat
-ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/docker-entrypoint"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/docker-entrypoint"]
 CMD ["-environment" "container"]
