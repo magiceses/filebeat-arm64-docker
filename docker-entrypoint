@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-echo $PWD
-echo $PATH
-
 # Check if the the user has invoked the image with flags.
 # eg. "filebeat -c filebeat.yml"
 if [[ -z $1 ]] || [[ ${1:0:1} == '-' ]] ; then
