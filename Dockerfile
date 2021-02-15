@@ -14,8 +14,8 @@ ENV GODEBUG=madvdontneed=1
 COPY docker-entrypoint /usr/local/bin/docker-entrypoint
 RUN chmod 755 /usr/local/bin/docker-entrypoint
 
-RUN apt update \                                                                                                                                                                                                                        
- && apt install tini\                                                                                                                                                                                                      
+RUN apt update \
+ && apt install tini
 
 RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.11.0-linux-arm64.tar.gz
 RUN tar -xzvf filebeat-7.11.0-linux-arm64.tar.gz
