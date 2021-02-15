@@ -31,6 +31,7 @@ RUN addgroup --gid 1000 filebeat
 #RUN useradd -M --uid 1000 --gid 1000 --groups 0 --home /usr/share/filebeat filebeat
 RUN adduser --no-create-home --uid 1000 --ingroup filebeat --home /usr/share/filebeat --disabled-password filebeat
 RUN addgroup filebeat root
+RUN chown -R filebeat.filebeat /usr/share/filebeat/
 USER filebeat
 ENV LIBBEAT_MONITORING_CGROUPS_HIERARCHY_OVERRIDE=/
 WORKDIR /usr/share/filebeat
