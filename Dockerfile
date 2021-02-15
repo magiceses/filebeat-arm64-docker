@@ -22,16 +22,13 @@ RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.11.0-l
 RUN tar -xzvf filebeat-7.11.0-linux-arm64.tar.gz
 RUN mv filebeat-7.11.0-linux-arm64 /usr/share/filebeat
 
-RUN ls -l /usr/share/filebeat
-RUN ls -l /sbin/
-RUN echo $PATH
-
 #RUN groupadd --gid 1000 filebeat
 RUN addgroup --gid 1000 filebeat
 #RUN useradd -M --uid 1000 --gid 1000 --groups 0 --home /usr/share/filebeat filebeat
 RUN adduser --no-create-home --uid 1000 --ingroup filebeat --home /usr/share/filebeat --disabled-password filebeat
 RUN addgroup filebeat root
 RUN chown -R filebeat.filebeat /usr/share/filebeat/
+RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 USER filebeat
 ENV LIBBEAT_MONITORING_CGROUPS_HIERARCHY_OVERRIDE=/
 WORKDIR /usr/share/filebeat
